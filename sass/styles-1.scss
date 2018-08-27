@@ -256,6 +256,16 @@ ul {
 	min-height: 48px;
 	min-width: 48px;
 }
+#favorite-button {
+	font-size: 2em;
+	border-color: transparent;
+	background: transparent;
+	color: $color-grey;
+}
+#favorite-button:hover {
+	color: $color-orange;
+}
+
 #main-title > a {
 	color: $color-orange;
 	text-decoration: none;
@@ -288,7 +298,9 @@ ul {
 	font-family: $font-fancy-title;
 	color: $color-orange;
 }
-
+#review-form {
+	text-align: left;
+}
 .more-restaurant-details {
 	background: linear-gradient(62deg, $color-orange, #f7ce68);
 	width: 100%;

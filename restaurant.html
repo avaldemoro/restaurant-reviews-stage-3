@@ -43,17 +43,43 @@
             <div id="cover-image">
                 <img id="restaurant-img">
             </div>
-
             <h2 id="restaurant-name"></h2>
             <p id="restaurant-address"></p>
             <p id="restaurant-cuisine"></p>
+            <button id="favorite-button">&hearts;</button>
+
             <div id="map-container" role="application">
                 <div id="map"></div>
             </div>
             <table id="restaurant-hours"></table>
         </div>
+
+
         <!-- end restaurant -->
         <!-- Beginning reviews -->
+        <h3> Write a Review </h3>
+        <div id="write-review">
+            <form id="review-form">
+                <p>Name:</p>
+                <input type="text" name="reviewer-name" value="Name">
+                <br>
+                <p>Comments:</p>
+                <textarea name="review" rows="10" cols="30">I thought the food was delicious!
+                </textarea>
+                <p>Rating:</p>
+                <select name="review-rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <br><br>
+                <input type="submit" value="Submit">
+
+            </form>
+        </div>
+
         <div id="reviews-container">
             <ul id="reviews-list"></ul>
         </div>

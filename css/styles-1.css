@@ -191,6 +191,15 @@ ul {
   min-height: 48px;
   min-width: 48px; }
 
+#favorite-button {
+  font-size: 2em;
+  border-color: transparent;
+  background: transparent;
+  color: #656666; }
+
+#favorite-button:hover {
+  color: #fbab7e; }
+
 #main-title > a {
   color: #fbab7e;
   text-decoration: none;
@@ -222,6 +231,9 @@ ul {
   vertical-align: center;
   font-family: "Playfair Display", serif;
   color: #fbab7e; }
+
+#review-form {
+  text-align: left; }
 
 .more-restaurant-details {
   background: linear-gradient(62deg, #fbab7e, #f7ce68);
