@@ -43,15 +43,21 @@
             <div id="cover-image">
                 <img id="restaurant-img">
             </div>
+            <button id="favorite-button">&hearts;</button>
             <h2 id="restaurant-name"></h2>
             <p id="restaurant-address"></p>
             <p id="restaurant-cuisine"></p>
-            <button id="favorite-button">&hearts;</button>
 
-            <div id="map-container" role="application">
-                <div id="map"></div>
+            <div id="map-and-hours-container">
+
+                <table id="restaurant-hours"></table>
+                <div id="map-container" role="application">
+                    <div id="map"></div>
+                </div>
             </div>
-            <table id="restaurant-hours"></table>
+
+
+
         </div>
 
 
@@ -60,13 +66,14 @@
         <h3> Write a Review </h3>
         <div id="write-review">
             <form id="review-form">
-                <p>Name:</p>
-                <input type="text" name="reviewer-name" value="Name">
-                <br>
-                <p>Comments:</p>
-                <textarea name="review" rows="10" cols="30">I thought the food was delicious!
+                <label>Name: </label>
+                <input type="text" name="reviewer-name">
+                <br><br>
+                <label>Comments: </label>
+                <textarea name="review-comments" rows="10" cols="30">
                 </textarea>
-                <p>Rating:</p>
+                <br><br>
+                <label>Rating:</label>
                 <select name="review-rating">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -75,7 +82,7 @@
                     <option value="5">5</option>
                 </select>
                 <br><br>
-                <input type="submit" value="Submit">
+                <input id="submit-button" type="button" value="Submit" onclick= "postReview();">
 
             </form>
         </div>
@@ -96,9 +103,9 @@
     <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
     <!-- Beginning scripts -->
     <!-- Database helpers -->
-    <script type="text/javascript" src="js/dbhelper.js"></script>
+    <script type="text/javascript" src="dist/dbhelper.js"></script>
     <!-- Main javascript file -->
-    <script type="text/javascript" src="js/restaurant_info.js"></script>
+    <script type="text/javascript" src="dist/restaurant_info.js"></script>
     <!-- Google Maps -->
     <!--  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_tKbW6A5pQ-eupxI56myUnHLqYCzOjKo&libraries=places&callback=initMap"></script> -->
     <!-- End scripts -->

@@ -1,4 +1,4 @@
-@charset "utf-8";
+ @charset "utf-8";
 
 // colors
 $color-light-grey: #f7f7f7;
@@ -41,6 +41,13 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 	#map {
 		height: 40vh;
 	}
+	#map-and-hours-container {
+		display: contents;
+	}
+	#restaurant-hours, #map-container {
+		width: 100%;
+	}
+
 	.more-restaurant-details {
 		letter-spacing: 5px;
 		font-size: 1em;
@@ -66,6 +73,7 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 		font-size: 0.75em;
 		font-weight: 100;
 	}
+
 	#restaurant-container > #restaurant-name {
 		font-size: 3em;
 	}
@@ -79,11 +87,11 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 	#main-title > a {
 		font-size: 3em;
 	}
-	#map-container {
-		margin-top: 2em;
-	}
 	#map {
 		height: 40vh;
+	}
+	#map-container {
+		width: 100%;
 	}
 	.more-restaurant-details {
 		letter-spacing: 5px;
@@ -105,18 +113,18 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 		padding: 1em 2em;
 		font-size: 1em;
 	}
-	ul {
+	ul#restaurants-list {
 		columns: 2;
 		-webkit-columns: 2;
 		-moz-columns: 2;
 	}
+	#map-and-hours-container {
+		display: flex;
+	}
 	#restaurant-container > #restaurant-name {
 		font-size: 3em;
 	}
-	#map-container {
-		margin-top: 2em;
 
-	}
 	#main-title {
 		font-size: 4em;
 	}
@@ -127,8 +135,12 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 		font-size: 0.75em;
 		padding: 2em 0;
 	}
+    #map-container {
+		width: 70%;
+	}
 	#restaurant-hours {
 		font-size: 1em;
+		width: 50%;
 	}
 	#cover-image > #restaurant-img {
 		margin: -30vh 0;
@@ -146,7 +158,8 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 	#neighborhoods-select, #cuisines-select{
 		width: 42vw;
 	}
-	ul {
+
+	ul#restaurant-list {
 		columns: 3;
 		-webkit-columns: 3;
 		-moz-columns: 3;
@@ -242,7 +255,7 @@ p#restaurant-cuisine {
 	padding-left: 3em;
 	text-align: center;
 }
-ul {
+ul#restaurants-list {
 	list-style-type: none;
 	padding: 0;
 	width: 90vw;
@@ -315,6 +328,9 @@ ul {
 .more-restaurant-details:focus {
 	background-color: #004c40;
 }
+#map-container {
+	float: right;
+}
 #map {
 	width: 100%;
 	background-color: #ccc;
@@ -339,13 +355,16 @@ ul {
 	letter-spacing: 2px;
 	color: $color-black;
 	text-align: center;
-	padding-top: 0.5em;
+	padding-top: 0.5em 0.5em 0 0.5em;
+    display: inline-block;
 }
 #restaurant-hours {
 	color: $color-grey;
-	padding: 2em;
-	margin-left: auto;
-	margin-right: auto;
+	padding: 0 2em;
+    margin: 0 auto 0 auto;
+}
+#map-and-hours-container {
+	margin-top: 1em;
 }
 ul#reviews-list {
 	columns: 1;

@@ -128,6 +128,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
     container.appendChild(ul);
 }
 
+
 /**
 * Create review HTML and add it to the webpage.
 */
@@ -153,6 +154,10 @@ createReviewHTML = (review) => {
     return li;
 }
 
+function postReview() {
+    console.log("hi");
+}
+
 /**
 * Add restaurant name to the breadcrumb navigation menu
 */
@@ -173,8 +178,8 @@ getParameterByName = (name, url) => {
     const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`),
     results = regex.exec(url);
     if (!results)
-    return null;
+        return null;
     if (!results[2])
-    return '';
+        return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
