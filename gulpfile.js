@@ -22,3 +22,7 @@ gulp.task('styles', function (done) {
         .pipe(gulp.dest('./css'));
     done();
 });
+
+var build = gulp.series(gulp.parallel('js', 'styles'));
+
+gulp.task('default', build);
