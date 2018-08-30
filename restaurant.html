@@ -65,28 +65,28 @@
             <h3 id="write-review-title"> Write a review </h3>
             <form id="review-form" method="POST" action="#">
                 <label for="review-name"><p>Name: </p></label>
-                <input type="text" id="review-name" name="reviewer" placeholder="Your name..">
+                <input type="text" id="review-name" name="reviewer" aria-label="Name" aria-required="true" placeholder="Your name.." required>
                 <br>
                 <label for="review-rating"><p>Rating: </p></label>
-                <select id="review-rating" name="rating">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                <select id="review-rating" name="rating" tabindex="0" aria-label="Rating select out of 5">
+                    <option value="1" tabindex="0">1</option>
+                    <option value="2" tabindex="0">2</option>
+                    <option value="3" tabindex="0">3</option>
+                    <option value="4" tabindex="0">4</option>
+                    <option value="5" tabindex="0">5</option>
                 </select>
                 <br>
                 <label for="review-comment"><p>Comments: </p></label>
                 <textarea id="review-comment" name="subject" placeholder="Write something.."></textarea>
                 <br>
                 <div id="submit-div">
-                    <input id="review-submit" type="submit" value="Submit" />
+                    <input id="review-submit" type="submit" value="Submit" aria-label="Submit review" tabindex="0" />
                 </div>
             </form>
         </div>
 
-        <div id="reviews-container">
-            <ul id="reviews-list"></ul>
+        <div id="reviews-container" role="region" tabindex="0" aria-label="Reviews of restaurants">
+            <ul id="reviews-list" role="list" tabindex="0" aria-label="Reviews"></ul>
         </div>
         <!-- End reviews -->
 

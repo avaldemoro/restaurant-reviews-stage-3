@@ -209,6 +209,7 @@ console.log(favoriteButton.dataset.liked);
 fillReviewsHTML = (reviews = self.reviews) => {
     const container = document.getElementById('reviews-container');
     const title = document.createElement('h3');
+    title.id = "reviews-title";
     title.innerHTML = 'Reviews';
     container.appendChild(title);
 
