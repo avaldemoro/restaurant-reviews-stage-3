@@ -2,10 +2,6 @@ let NUMBEROFRESTAURANTS = 10;
 /* Common database helper functions. */
 class DBHelper {
     /* Database URL. */
-    static get DATABASE_URL() {
-        const port = 1337; // Change this to your server port
-        return `http://localhost:${port}/restaurants`;
-    }
     static get DATABASE_BASE_URL() {
         const port = 1337; // Change this to your server port
         return `http://localhost:${port}`;
@@ -15,7 +11,7 @@ class DBHelper {
      * Open IDB.
      */
     static openIDB() {
-        return idb.open('restaurantReviewsApp', 1, upgradeDb => {
+        return idb.open('Restaurant-Reviews', 1, upgradeDb => {
             if (!upgradeDb.objectStoreNames.contains('restaurants')) {
                 const store = upgradeDb.createObjectStore('restaurants', {
                     keyPath: 'id'
@@ -124,7 +120,6 @@ class DBHelper {
                 console.log(
                     `Reviews data from API for restaurant: ${self.restaurant.id}`
                 );
-                console.log(data);
                 return data;
             });
     }
@@ -137,7 +132,7 @@ class DBHelper {
                     // Make an API request
                     return DBHelper.loadFromAPI('restaurants');
                 }
-                console.log(`FROM IDB: ${data}`);
+                console.log(`From idb: ${data}`);
                 return data;
             })
             .then(restaurants => {
