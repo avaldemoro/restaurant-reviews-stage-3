@@ -1,3 +1,4 @@
+let NUMBEROFRESTAURANTS = 10;
 /* Common database helper functions. */
 class DBHelper {
     /* Database URL. */
@@ -5,91 +6,147 @@ class DBHelper {
         const port = 1337; // Change this to your server port
         return `http://localhost:${port}/restaurants`;
     }
-
-    static createIDBStore(restaurants) {
-        // Get the compatible IndexedDB version
-        var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
-
-        // Open the database
-        var open = indexedDB.open('Restaurant-Database', 1);
-
-        // Create schema
-        open.onupgradeneeded = function() {
-            var db = open.result;
-            var store = db.createObjectStore('Restaurant', {keyPath: 'id'});
-            var index = store.createIndex('by-id', 'id');
-        };
-
-        open.onerror = function(err) {
-            console.error('Something went wrong with IndexDB: ' + err.target.errorCode);
-        }
-
-        open.onsuccess = function() {
-            // Start new transaction
-            var db = open.result;
-            var tx = db.transaction('Restaurant', 'readwrite');
-            var store = tx.objectStore('Restaurant');
-            var index = store.index('by-id');
-
-            // Add the restaurant data
-            restaurants.forEach(function(restaurant) {
-                store.put(restaurant);
-            });
-
-            // Close the db when the transaction is done
-            tx.oncomplete = function() {
-                db.close();
-            };
-        }
+    static get DATABASE_BASE_URL() {
+        const port = 1337; // Change this to your server port
+        return `http://localhost:${port}`;
     }
 
-    static getCachedData(callback) {
-        var restaurants = [];
-
-        // Get the compatible IndexedDB version
-        var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
-        var open = indexedDB.open("Restaurant-Database", 1);
-
-        open.onsuccess = function() {
-            var db = open.result;
-            var tx = db.transaction("Restaurant", "readwrite");
-            var store = tx.objectStore("Restaurant");
-            var getData = store.getAll();
-
-            getData.onsuccess = function() {
-                callback(null, getData.result);
+    /**
+     * Open IDB.
+     */
+    static openIDB() {
+        return idb.open('restaurantReviewsApp', 1, upgradeDb => {
+            if (!upgradeDb.objectStoreNames.contains('restaurants')) {
+                const store = upgradeDb.createObjectStore('restaurants', {
+                    keyPath: 'id'
+                });
             }
 
-            tx.oncomplete = function() {
-                db.close();
-            };
-        }
+            if (!upgradeDb.objectStoreNames.contains('pending-reviews')) {
+                const store = upgradeDb.createObjectStore('pending-reviews', {
+                    keyPath: 'id',
+                    autoIncrement: true
+                });
+            }
+
+            for (let i = 1; i < NUMBEROFRESTAURANTS; i++) {
+                if (!upgradeDb.objectStoreNames.contains(`reviews-restaurant-${i}`)) {
+                    const store = upgradeDb.createObjectStore(`reviews-restaurant-${i}`, {
+                        keyPath: 'id',
+                        autoIncrement: true
+                    });
+                }
+            }
+        });
+    }
+
+    /**
+     * Delete storage in IDB.
+     */
+    static deleteInIDB(transactionName, storeName) {
+        return DBHelper.openIDB().then(db => {
+            const tx = db
+                .transaction(transactionName, 'readwrite')
+                .objectStore(storeName)
+                .clear();
+            return tx.complete;
+        });
+    }
+
+    /**
+     * Load from IDB.
+     */
+    static loadFromIDB(transactionName, storeName) {
+        return DBHelper.openIDB().then(db => {
+            const index = db.transaction(transactionName).objectStore(storeName);
+            return index.getAll();
+        });
+    }
+
+    /**
+     * Save to IDB.
+     */
+    static saveToIDB(data, transactionName, storeName) {
+        return DBHelper.openIDB().then(db => {
+            if (!db) return;
+
+            const tx = db.transaction(transactionName, 'readwrite');
+            const store = tx.objectStore(storeName);
+
+            Array.from(data).forEach(bit => store.put(bit));
+
+            return tx.complete;
+        });
+    }
+
+    /**
+     * Save to IDB.
+     */
+    static saveReviewToIDB(data, transactionName, storeName) {
+        return DBHelper.openIDB().then(db => {
+            if (!db) return;
+
+            const tx = db.transaction(transactionName, 'readwrite');
+            const store = tx.objectStore(storeName);
+
+            store.put(data);
+
+            return tx.complete;
+        });
+    }
+
+    /**
+     * Get data from API.
+     */
+    static loadFromAPI(slug) {
+        return fetch(`${DBHelper.DATABASE_BASE_URL}/${slug}`)
+            .then(response => response.json())
+            .then(data => {
+                // Write items to IDB for time site is visited
+                DBHelper.saveToIDB(data, slug, slug);
+                return data;
+            });
+    }
+
+    /**
+     * Get reviews data from API.
+     */
+    static loadReviewsFromAPI(slug) {
+        return fetch(`${DBHelper.DATABASE_BASE_URL}/${slug}`)
+            .then(response => response.json())
+            .then(data => {
+                // Write items to IDB for time site is visited
+                DBHelper.saveToIDB(
+                    data,
+                    `reviews-restaurant-${self.restaurant.id}`,
+                    `reviews-restaurant-${self.restaurant.id}`
+                );
+                console.log(
+                    `Reviews data from API for restaurant: ${self.restaurant.id}`
+                );
+                console.log(data);
+                return data;
+            });
     }
 
     /* Fetch all restaurants. */
     static fetchRestaurants(callback) {
-        if (navigator.onLine) {
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', DBHelper.DATABASE_URL);
-            xhr.onload = () => {
-                if (xhr.status === 200) { // Got a success response from server!
-                    const restaurants = JSON.parse(xhr.responseText);
-                    DBHelper.createIDBStore(restaurants); // Cache restaurants
-                    callback(null, restaurants);
-                } else { // Oops!. Got an error from server.
-                    const error = (`Request failed. Returned status of ${xhr.status}`);
-                    callback(error, null);
+        DBHelper.loadFromIDB('restaurants', 'restaurants')
+            .then(data => {
+                if (data.length == 0) {
+                    // Make an API request
+                    return DBHelper.loadFromAPI('restaurants');
                 }
-            };
-            xhr.send();
-        } else {
-            console.log('Browser is offline, using the cached data.');
-            DBHelper.getCachedData((error, restaurants) => {
-                if (restaurants.length > 0) {
-                    callback(null, restaurants);
-                }
+                console.log(`FROM IDB: ${data}`);
+                return data;
+            })
+            .then(restaurants => {
+                callback(null, restaurants);
+            })
+            .catch(error => {
+                console.log(`Something is wrong: ${error}`);
+                callback(error, null);
             });
-        }
     }
 
     /* Fetch a restaurant by its ID. */
@@ -195,8 +252,13 @@ class DBHelper {
 
     /* Restaurant image URL. */
     static imageUrlForRestaurant(restaurant) {
-        return (`/img/${restaurant.photograph}.jpg`);
+        let { photograph } = restaurant;
+        if (!photograph) {
+            photograph = 10;
+        }
+        return `/img/${photograph}.jpg`;
     }
+
     /* Map marker for a restaurant. */
     static mapMarkerForRestaurant(restaurant, map) {
         // https://leafletjs.com/reference-1.3.0.html#marker
@@ -206,5 +268,62 @@ class DBHelper {
                 url: DBHelper.urlForRestaurant(restaurant)})
         marker.addTo(newMap);
         return marker;
+    }
+
+    /**
+     * Fetch all restaurant reviews
+     */
+    static fetchReviewsById(id, callback) {
+        DBHelper.loadFromIDB(`reviews-restaurant-${id}`, `reviews-restaurant-${id}`)
+            .then(data => {
+                if (data.length == 0) {
+                    return DBHelper.loadReviewsFromAPI(`reviews/?restaurant_id=${id}`);
+                }
+                return Promise.resolve(data);
+            })
+            .then(reviews => {
+                callback(null, reviews);
+            })
+            .catch(err => {
+                console.log(`ERROR DB: ${err.status}`);
+                callback(err, null);
+            });
+    }
+
+    /**
+     * Post new review to API
+     */
+    static postToAPI(review) {
+        if (!review) return;
+
+        return fetch(`${DBHelper.DATABASE_BASE_URL}/reviews`, {
+                method: 'POST',
+                body: JSON.stringify(review),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(resp => resp.json())
+            .then(data => {
+                // save to IDB
+                DBHelper.saveReviewToIDB(
+                    data,
+                    `reviews-restaurant-${self.restaurant.id}`,
+                    `reviews-restaurant-${self.restaurant.id}`
+                );
+                return data;
+            })
+            .catch(err => {
+                // Save a pending review in IDB
+                DBHelper.saveReviewToIDB(review, `pending-reviews`, `pending-reviews`);
+                // Add it as a global too
+                if (!self.pendingReviews) {
+                    self.pendingReviews = [];
+                }
+                self.pendingReviews.push(review);
+
+                console.log(`Error: ${err}`);
+                return review;
+            });
     }
 }

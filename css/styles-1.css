@@ -82,12 +82,12 @@
     font-size: 0.75em;
     padding: 2em 0; }
   #map-container {
-    width: 70%; }
+    width: 100%; }
   #restaurant-hours {
     font-size: 1em;
     width: 50%; }
   #cover-image > #restaurant-img {
-    margin: -30vh 0; } }
+    margin: -20vh 0; } }
 
 /* Medium Devices, Desktops, and beyond */
 @media only screen and (min-width: 992px) {
@@ -258,9 +258,6 @@ ul#restaurants-list {
 .more-restaurant-details:focus {
   background-color: #004c40; }
 
-#map-container {
-  float: right; }
-
 #map {
   width: 100%;
   background-color: #ccc;
@@ -292,8 +289,16 @@ ul#restaurants-list {
 
 #restaurant-hours {
   color: #656666;
-  padding: 0 2em;
+  padding: 1em 2em;
   margin: 0 auto 0 auto; }
+
+#map-container-restaurant {
+  width: 70%;
+  float: right;
+  background: #252831 none repeat scroll 0 0;
+  height: 87%;
+  position: relative;
+  right: 0; }
 
 #map-and-hours-container {
   margin-top: 1em; }
@@ -305,7 +310,7 @@ ul#reviews-list {
   font-size: 1em; }
 
 td {
-  padding: 0.5em 2em;
+  padding: 0.5em 1em;
   border-bottom: 1px solid #af8c8c; }
 
 .columns {

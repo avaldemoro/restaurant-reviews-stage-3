@@ -8,7 +8,7 @@ gulp.task('default', function() {
 });
 
 gulp.task('js', () => {
-  return gulp.src(['js/dbhelper.js', 'js/main.js', 'js/restaurant_info.js'])
+  return gulp.src(['js/dbhelper.js', 'js/main.js', 'js/restaurant_info.js', 'js/idb.js'])
     .pipe(uglify())
     .pipe(gulp.dest('dist'));
 });
