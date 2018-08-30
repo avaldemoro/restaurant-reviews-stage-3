@@ -326,4 +326,25 @@ class DBHelper {
                 return review;
             });
     }
+
+    /**
+     * Handle favorite restaurant, post to API and save in IDB
+     */
+    static favoriteRestaurant(restaurant) {
+        if (!restaurant) return;
+
+        return fetch(
+                `${DBHelper.DATABASE_BASE_URL}/restaurants/${restaurant.id}/?is_favorite=${
+        restaurant.is_favorite}`, {
+                    method: 'PUT'
+                }
+            )
+            .then(response => response.json())
+            .then(data => {
+                DBHelper.saveToIDB(self.restaurant, 'restaurants', 'restaurants');
+                return data;
+            })
+            .catch(e => console.error(`${e}: Could not update.`));
+    }
+
 }

@@ -69,6 +69,8 @@ initMap = () => {
 
             document.getElementById('review-submit')
                     .addEventListener('click', submitReview);
+
+
         }
     });
 }
@@ -112,12 +114,15 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     const cuisine = document.getElementById('restaurant-cuisine');
     cuisine.innerHTML =  restaurant.cuisine_type;
 
+    favoriteRestaurantHTML();
+    
     // fill operating hours
     if (restaurant.operating_hours) {
         fillRestaurantHoursHTML();
     }
     // get reviews by id and fill reviews
     getReviewsById();
+
 }
 
 /* Get reviews by id */
@@ -158,6 +163,46 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 
         hours.appendChild(row);
     }
+}
+
+/* Favorite restaurant */
+favoriteRestaurantHTML = (restaurant = self.restaurant) => {
+    const favoriteButton = document.getElementById('favorite-button');
+
+    if (restaurant.is_favorite == null || restaurant.is_favorite == undefined) {
+        restaurant.is_favorite = false;
+    }
+
+
+    favoriteButton.dataset.liked = restaurant.is_favorite;
+console.log(favoriteButton.dataset.liked);
+    if (favoriteButton.dataset.liked == 'false') {
+        favoriteButton.style.color = '#656666';
+    } else {
+        favoriteButton.style.color = '#fbab7e';
+    }
+
+    favoriteButton.addEventListener('click', e => {
+        // Update the UI
+        if (e.target.dataset.liked == 'false') {
+            e.target.dataset.liked = true;
+            e.target.style.color = '#fbab7e';
+
+            e.target.parentNode.parentNode.classList.add('liked');
+        } else {
+            e.target.dataset.liked = false;
+            e.target.style.color = '#656666';
+
+            e.target.parentNode.parentNode.classList.remove('liked');
+        }
+
+        restaurant.is_favorite = e.target.dataset.liked;
+
+        // Update the API and IDB
+        DBHelper.favoriteRestaurant(restaurant);
+    });
+
+
 }
 
 /* Create all reviews HTML and add them to the webpage. */
