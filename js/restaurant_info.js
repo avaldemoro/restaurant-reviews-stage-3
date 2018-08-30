@@ -236,27 +236,26 @@ fillReviewsHTML = (reviews = self.reviews) => {
 /* Create review HTML and add it to the webpage. */
 createReviewHTML = (review) => {
     const li = document.createElement('li');
-    li.id = "review-list-item";
+    li.className = "review-item";
 
     const date = document.createElement('p');
-    date.id = "review-list-date";
+    date.className = "review-date";
     const dateString = new Date(review.createdAt);
     date.innerHTML = ">> " + dateString.toDateString();
     li.appendChild(date);
 
     const name = document.createElement('p');
-    name.id = "reviewer-list-name";
+    name.className = "review-name";
     name.innerHTML = review.name;
     li.appendChild(name);
 
     const rating = document.createElement('p');
-    rating.id = "review-list-rating";
+    rating.className = "review-rating";
     rating.innerHTML = `<b>Rating: </b>${review.rating} / 5`;
     li.appendChild(rating);
 
     const comments = document.createElement('p');
-    comments.id = "review-list-comments"
-    comments.id = "comments";
+    comments.className = "review-comments"
     comments.innerHTML = review.comments;
     li.appendChild(comments);
 
