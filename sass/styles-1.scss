@@ -48,6 +48,7 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 		width: 100%;
 	}
 
+
 	.more-restaurant-details {
 		letter-spacing: 5px;
 		font-size: 1em;
@@ -63,6 +64,10 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 	.filter-options {
 		margin-bottom: 1.5em;
 	}
+
+    #comments {
+        padding: 1em 2em;
+    }
 }
 /* Tablets sizes*/
 @media only screen and (min-width : $break-small) {
@@ -90,6 +95,7 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 	#map {
 		height: 40vh;
 	}
+
 	#map-container {
 		width: 100%;
 	}
@@ -103,6 +109,9 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 	#cover-image > #restaurant-img {
 		margin: -20vh 0;
 	}
+    #comments {
+        padding: 1em 2em;
+    }
 
 
 }
@@ -118,6 +127,12 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 		-webkit-columns: 2;
 		-moz-columns: 2;
 	}
+    ul#reviews-list {
+        columns: 2;
+        -webkit-columns: 2;
+		-moz-columns: 2;
+    }
+
 	#map-and-hours-container {
 		display: flex;
 	}
@@ -157,6 +172,10 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 		width: 42vw;
 	}
 
+    #comments {
+        padding-top: 0;
+    }
+
 	ul#restaurant-list {
 		columns: 3;
 		-webkit-columns: 3;
@@ -167,6 +186,12 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 		float: left;
 		position: relative;
 	}
+
+    ul#reviews-list {
+        columns: 2;
+        -webkit-columns: 2;
+		-moz-columns: 2;
+    }
 }
 
 /*********** GLOBAL CSS ***********/
@@ -258,6 +283,11 @@ ul#restaurants-list {
 	padding: 0;
 	width: 90vw;
 	margin: 0 auto;
+
+	columns: 3;
+	-webkit-columns: 3;
+	-moz-columns: 3;
+
 }
 #breadcrumb > a {
 	color: #af8c8c;
@@ -370,11 +400,90 @@ ul#restaurants-list {
 #map-and-hours-container {
 	margin-top: 1em;
 }
-ul#reviews-list {
-	columns: 1;
-	-webkit-columns: 1;
-	-moz-columns: 1;
+#reviews-list {
 	font-size: 1em;
+    padding-left: 0;
+}
+
+#create-review-form {
+    display: inline-block;
+    margin: 0.75em 1em;
+    width: 50%;
+    padding: 1em;
+    background: linear-gradient(62deg, $color-orange, #f7ce68);
+    border-radius: 10px;
+    box-shadow: 5px 5px 8px 0 rgba(46,61,73, 0.2);
+
+
+    #review-form {
+        padding: 0.5em 1em;
+    }
+    #review-name {
+        padding: 1em;
+        border-radius: 8px;
+        width: 95%;
+        border: 0;
+        font-size: 0.8em;
+    }
+    #review-comment {
+        border-radius: 8px;
+        padding: 1em;
+        border: 0;
+        width: 95%;
+        font-size: 0.8em;
+        display: initial;
+    }
+    #review-rating {
+        border-radius: 8px;
+        padding: 1em;
+        border: 0;
+        width: 100%;
+        font-size: 0.8em;
+        background: $color-white;
+    }
+    #write-review-title {
+        padding: 0.5em;
+    }
+    #review-submit {
+        padding: 1em;
+        border: 0;
+        font-size: 1em;
+        border-radius: 8px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-top:1em;
+        font-family: $font-fancy-title;
+        color: $color-white;
+        box-shadow: 5px 5px 8px 0 rgba(46,61,73, 0.2);
+        background-color: $color-grey;
+
+    }
+    p {
+        font-family: $font-normal-text;
+        color: $color-black;
+        padding: 1em 0;
+    }
+    #submit-div {
+        display: grid;
+    }
+}
+
+#review-list-item {
+    #reviewer-list-name {
+        font-family: $font-fancy-title;
+        font-size: 2em;
+        padding: 0 1em 0;
+        color: $color-black;
+    }
+    #review-list-date {
+        font-size: 0.75em;
+        font-weight: 100;
+        text-transform: uppercase;
+        margin: 0;
+        color: $color-orange;
+        padding: 2em 0 0.5em 3em;
+    }
+
 }
 td {
 	padding: 0.5em 1em;

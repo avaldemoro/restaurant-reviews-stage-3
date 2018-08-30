@@ -115,7 +115,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
     cuisine.innerHTML =  restaurant.cuisine_type;
 
     favoriteRestaurantHTML();
-    
+
     // fill operating hours
     if (restaurant.operating_hours) {
         fillRestaurantHoursHTML();
@@ -235,20 +235,26 @@ fillReviewsHTML = (reviews = self.reviews) => {
 /* Create review HTML and add it to the webpage. */
 createReviewHTML = (review) => {
     const li = document.createElement('li');
+    li.id = "review-list-item";
+
+    const date = document.createElement('p');
+    date.id = "review-list-date";
+    const dateString = new Date(review.createdAt);
+    date.innerHTML = ">> " + dateString.toDateString();
+    li.appendChild(date);
+
     const name = document.createElement('p');
+    name.id = "reviewer-list-name";
     name.innerHTML = review.name;
     li.appendChild(name);
 
-    const date = document.createElement('p');
-    const dateString = new Date(review.createdAt);
-    date.innerHTML = dateString.toDateString();
-    li.appendChild(date);
-
     const rating = document.createElement('p');
-    rating.innerHTML = `Rating: ${review.rating}`;
+    rating.id = "review-list-rating";
+    rating.innerHTML = `<b>Rating: </b>${review.rating} / 5`;
     li.appendChild(rating);
 
     const comments = document.createElement('p');
+    comments.id = "review-list-comments"
     comments.id = "comments";
     comments.innerHTML = review.comments;
     li.appendChild(comments);

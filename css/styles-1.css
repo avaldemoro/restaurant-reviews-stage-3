@@ -29,7 +29,9 @@
   #restaurants-list {
     margin-bottom: 3em; }
   .filter-options {
-    margin-bottom: 1.5em; } }
+    margin-bottom: 1.5em; }
+  #comments {
+    padding: 1em 2em; } }
 
 /* Tablets sizes*/
 @media only screen and (min-width: 600px) {
@@ -57,7 +59,9 @@
     width: 45vw;
     margin: 3em 0.5em; }
   #cover-image > #restaurant-img {
-    margin: -20vh 0; } }
+    margin: -20vh 0; }
+  #comments {
+    padding: 1em 2em; } }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
@@ -65,6 +69,10 @@
     padding: 1em 2em;
     font-size: 1em; }
   ul#restaurants-list {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2; }
+  ul#reviews-list {
     columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2; }
@@ -96,13 +104,19 @@
     padding: 0 0.75em; }
   #neighborhoods-select, #cuisines-select {
     width: 42vw; }
+  #comments {
+    padding-top: 0; }
   ul#restaurant-list {
     columns: 3;
     -webkit-columns: 3;
     -moz-columns: 3; }
   .columns {
     float: left;
-    position: relative; } }
+    position: relative; }
+  ul#reviews-list {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2; } }
 
 /*********** GLOBAL CSS ***********/
 body, td, th, p {
@@ -190,7 +204,10 @@ ul#restaurants-list {
   list-style-type: none;
   padding: 0;
   width: 90vw;
-  margin: 0 auto; }
+  margin: 0 auto;
+  columns: 3;
+  -webkit-columns: 3;
+  -moz-columns: 3; }
 
 #breadcrumb > a {
   color: #af8c8c;
@@ -303,11 +320,76 @@ ul#restaurants-list {
 #map-and-hours-container {
   margin-top: 1em; }
 
-ul#reviews-list {
-  columns: 1;
-  -webkit-columns: 1;
-  -moz-columns: 1;
-  font-size: 1em; }
+#reviews-list {
+  font-size: 1em;
+  padding-left: 0; }
+
+#create-review-form {
+  display: inline-block;
+  margin: 0.75em 1em;
+  width: 50%;
+  padding: 1em;
+  background: linear-gradient(62deg, #fbab7e, #f7ce68);
+  border-radius: 10px;
+  -webkit-box-shadow: 5px 5px 8px 0 rgba(46, 61, 73, 0.2);
+          box-shadow: 5px 5px 8px 0 rgba(46, 61, 73, 0.2); }
+  #create-review-form #review-form {
+    padding: 0.5em 1em; }
+  #create-review-form #review-name {
+    padding: 1em;
+    border-radius: 8px;
+    width: 95%;
+    border: 0;
+    font-size: 0.8em; }
+  #create-review-form #review-comment {
+    border-radius: 8px;
+    padding: 1em;
+    border: 0;
+    width: 95%;
+    font-size: 0.8em;
+    display: initial; }
+  #create-review-form #review-rating {
+    border-radius: 8px;
+    padding: 1em;
+    border: 0;
+    width: 100%;
+    font-size: 0.8em;
+    background: #fff; }
+  #create-review-form #write-review-title {
+    padding: 0.5em; }
+  #create-review-form #review-submit {
+    padding: 1em;
+    border: 0;
+    font-size: 1em;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 1em;
+    font-family: "Playfair Display", serif;
+    color: #fff;
+    -webkit-box-shadow: 5px 5px 8px 0 rgba(46, 61, 73, 0.2);
+            box-shadow: 5px 5px 8px 0 rgba(46, 61, 73, 0.2);
+    background-color: #656666; }
+  #create-review-form p {
+    font-family: "Source Sans Pro", sans-serif;
+    color: #000;
+    padding: 1em 0; }
+  #create-review-form #submit-div {
+    display: grid; }
+
+#review-list-item #reviewer-list-name {
+  font-family: "Playfair Display", serif;
+  font-size: 2em;
+  padding: 0 1em 0;
+  color: #000; }
+
+#review-list-item #review-list-date {
+  font-size: 0.75em;
+  font-weight: 100;
+  text-transform: uppercase;
+  margin: 0;
+  color: #fbab7e;
+  padding: 2em 0 0.5em 3em; }
 
 td {
   padding: 0.5em 1em;
