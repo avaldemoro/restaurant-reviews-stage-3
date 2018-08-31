@@ -18,7 +18,9 @@
     height: 40vh; }
   #map-and-hours-container {
     display: contents; }
-  #restaurant-hours, #map-container {
+  #restaurant-hours {
+    width: 100%; }
+  #map-container-restaurant {
     width: 100%; }
   .more-restaurant-details {
     letter-spacing: 5px;
@@ -27,11 +29,17 @@
     width: 90vw;
     margin: 1em; }
   #restaurants-list {
-    margin-bottom: 3em; }
+    margin-bottom: 3em;
+    columns: 1;
+    -webkit-columns: 1;
+    -moz-columns: 1; }
   .filter-options {
     margin-bottom: 1.5em; }
   #comments {
-    padding: 1em 2em; } }
+    padding: 1em 2em; }
+  #create-review-form {
+    width: 80%;
+    padding: 0; } }
 
 /* Tablets sizes*/
 @media only screen and (min-width: 600px) {
@@ -61,7 +69,12 @@
   #cover-image > #restaurant-img {
     margin: -20vh 0; }
   #comments {
-    padding: 1em 2em; } }
+    padding: 1em 2em; }
+  #map-container-restaurant {
+    width: 100%; }
+  #create-review-form {
+    width: 90%;
+    padding: 0; } }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) {
@@ -106,7 +119,7 @@
     width: 42vw; }
   #comments {
     padding-top: 0; }
-  ul#restaurant-list {
+  ul#restaurants-list {
     columns: 3;
     -webkit-columns: 3;
     -moz-columns: 3; }
@@ -116,7 +129,12 @@
   ul#reviews-list {
     columns: 2;
     -webkit-columns: 2;
-    -moz-columns: 2; } }
+    -moz-columns: 2; }
+  #map-container-restaurant {
+    width: 70%; }
+  #create-review-form {
+    width: 50%;
+    padding: 1em; } }
 
 /*********** GLOBAL CSS ***********/
 body, td, th, p {
@@ -207,10 +225,7 @@ ul#restaurants-list {
   list-style-type: none;
   padding: 0;
   width: 90vw;
-  margin: 0 auto;
-  columns: 3;
-  -webkit-columns: 3;
-  -moz-columns: 3; }
+  margin: 0 auto; }
 
 #reviews-title {
   padding-top: 1em;
@@ -317,7 +332,6 @@ ul#restaurants-list {
   margin: 0 auto 0 auto; }
 
 #map-container-restaurant {
-  width: 70%;
   float: right;
   background: #252831 none repeat scroll 0 0;
   height: 87%;
@@ -334,8 +348,6 @@ ul#restaurants-list {
 #create-review-form {
   display: inline-block;
   margin: 0.75em 1em;
-  width: 50%;
-  padding: 1em;
   background: linear-gradient(62deg, #fbab7e, #f7ce68);
   border-radius: 10px;
   -webkit-box-shadow: 5px 5px 8px 0 rgba(46, 61, 73, 0.2);

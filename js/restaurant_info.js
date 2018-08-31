@@ -171,15 +171,18 @@ favoriteRestaurantHTML = (restaurant = self.restaurant) => {
 
     if (restaurant.is_favorite == null || restaurant.is_favorite == undefined) {
         restaurant.is_favorite = false;
+        favoriteButton.setAttribute('aria-label', 'Add to favorites list');
+    } else {
+        favoriteButton.setAttribute('aria-label', 'Remove to favorites list');
     }
 
-
     favoriteButton.dataset.liked = restaurant.is_favorite;
-console.log(favoriteButton.dataset.liked);
     if (favoriteButton.dataset.liked == 'false') {
         favoriteButton.style.color = '#656666';
+        favoriteButton.setAttribute('aria-label', 'Add to favorites list');
     } else {
         favoriteButton.style.color = '#fbab7e';
+        favoriteButton.setAttribute('aria-label', 'Remove from favorites list');
     }
 
     favoriteButton.addEventListener('click', e => {
@@ -189,11 +192,15 @@ console.log(favoriteButton.dataset.liked);
             e.target.style.color = '#fbab7e';
 
             e.target.parentNode.parentNode.classList.add('liked');
+            favoriteButton.setAttribute('aria-label', 'Remove from favorites list');
+
         } else {
             e.target.dataset.liked = false;
             e.target.style.color = '#656666';
 
             e.target.parentNode.parentNode.classList.remove('liked');
+            favoriteButton.setAttribute('aria-label', 'Add to favorites list');
+
         }
 
         restaurant.is_favorite = e.target.dataset.liked;
@@ -282,6 +289,7 @@ getParameterByName = (name, url) => {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+/* Submit review to the db */
 submitReview = e => {
     e.preventDefault();
     let nameElement = document.getElementById('review-name');

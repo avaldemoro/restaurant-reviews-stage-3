@@ -111,10 +111,31 @@
     <!-- End scripts -->
     <script>
     if('serviceWorker' in navigator) {
-      navigator.serviceWorker
-               .register('/sw.js')
-               .then(function() { console.log("Service Worker Registered"); });
+        navigator.serviceWorker
+        .register('/sw.js')
+        .then(function() { console.log("Service Worker Registered"); });
+
+        navigator.serviceWorker.ready.then(function (swRegistration) {
+            return swRegistration.sync.register('myFirstSync');
+        });
     }
+    self.addEventListener('sync', function (event) {
+        console.log("START SYNCING");
+        if (event.tag === 'myFirstSync') {
+            event.waitUntil(
+                sendReviews().then(() => {
+                }).catch(err => {
+                    console.log(err);
+                })
+            );
+            event.waitUntil(
+                sendFavorites().then(() => {
+                }).catch(err => {
+                    console.log(err);
+                })
+            );
+        }
+    });
     </script>
 
 </body>

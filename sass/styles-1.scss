@@ -44,9 +44,12 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 	#map-and-hours-container {
 		display: contents;
 	}
-	#restaurant-hours, #map-container {
+	#restaurant-hours {
 		width: 100%;
 	}
+    #map-container-restaurant {
+        width: 100%;
+    }
 
 
 	.more-restaurant-details {
@@ -60,6 +63,10 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 
 	#restaurants-list {
 		margin-bottom: 3em;
+		columns: 1;
+		-webkit-columns: 1;
+		-moz-columns: 1;
+
 	}
 	.filter-options {
 		margin-bottom: 1.5em;
@@ -68,6 +75,11 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
     #comments {
         padding: 1em 2em;
     }
+    #create-review-form {
+        width: 80%;
+        padding: 0;
+    }
+
 }
 /* Tablets sizes*/
 @media only screen and (min-width : $break-small) {
@@ -111,6 +123,13 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
 	}
     #comments {
         padding: 1em 2em;
+    }
+    #map-container-restaurant {
+        width: 100%;
+    }
+    #create-review-form {
+        width: 90%;
+        padding: 0;
     }
 
 
@@ -176,7 +195,7 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
         padding-top: 0;
     }
 
-	ul#restaurant-list {
+	ul#restaurants-list {
 		columns: 3;
 		-webkit-columns: 3;
 		-moz-columns: 3;
@@ -191,6 +210,13 @@ $font-normal-text: 'Source Sans Pro', sans-serif;
         columns: 2;
         -webkit-columns: 2;
 		-moz-columns: 2;
+    }
+    #map-container-restaurant {
+        width: 70%;
+    }
+    #create-review-form {
+        width: 50%;
+        padding: 1em;
     }
 }
 
@@ -286,11 +312,6 @@ ul#restaurants-list {
 	padding: 0;
 	width: 90vw;
 	margin: 0 auto;
-
-	columns: 3;
-	-webkit-columns: 3;
-	-moz-columns: 3;
-
 }
 
 #reviews-title {
@@ -398,7 +419,6 @@ ul#restaurants-list {
 }
 // map container in restaurants html
 #map-container-restaurant {
-    width: 70%;
     float: right;
     background: #252831 none repeat scroll 0 0;
 	height: 87%;
@@ -416,8 +436,6 @@ ul#restaurants-list {
 #create-review-form {
     display: inline-block;
     margin: 0.75em 1em;
-    width: 50%;
-    padding: 1em;
     background: linear-gradient(62deg, $color-orange, #f7ce68);
     border-radius: 10px;
     box-shadow: 5px 5px 8px 0 rgba(46,61,73, 0.2);
