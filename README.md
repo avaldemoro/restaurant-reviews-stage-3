@@ -1,4 +1,4 @@
-# Mobile Web Specialist Certification Course
+# Mobile Web Specialist Course
 ---
 
 ## Project Overview: Stage 3
@@ -21,6 +21,14 @@ This series of projects incrementally convert a static webpage to a mobile-ready
 
 ### Leaflet.js and Mapbox
 This repository uses leafletjs with Mapbox. You need to replace `<your MAPBOX API KEY HERE>` with a token from [Mapbox](https://www.mapbox.com/). Mapbox is free to use, and does not require any payment information.  Mapbox is free to use, and does not require any payment information.
+
+## Screenshots
+![Screenshot](screenshots/1.png)
+![Screenshot](screenshots/2.png)
+![Screenshot](screenshots/3.png)
+![Screenshot](screenshots/4.png)
+![Screenshot](screenshots/5.png)
+![Screenshot](screenshots/6.png)
 
 ## Project Requirements
 **Add a form to allow users to create their own reviews**: In previous versions of the application, users could only read reviews from the database. You will need to add a form that adds new reviews to the database. The form should include the user’s name, the restaurant id, the user’s rating, and whatever comments they have. Submitting the form should update the server when the user is online.
